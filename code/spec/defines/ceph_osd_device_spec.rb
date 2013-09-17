@@ -73,8 +73,7 @@ ceph::key { 'admin':
 
     it { should contain_exec('ceph_osd_create_device').with(
       'command' => 'ceph osd create dummy-uuid-1234',
-      'unless'  => 'ceph osd dump | grep -sq dummy-uuid-1234',
-      'require' => 'Ceph::Key[admin]'
+      'unless'  => 'ceph osd dump | grep -sq dummy-uuid-1234'
     ) }
 
     describe 'when the osd is created' do
@@ -83,7 +82,7 @@ ceph::key { 'admin':
           :concat_basedir      => '/var/lib/puppet/lib/concat',
           :blkid_uuid_device1  => 'dummy-uuid-1234',
           :ceph_osd_id_device1 => '56',
-          :hostname            => 'dummy-host',
+          :hostname            => 'dummy-host'
         }
       end
 
@@ -196,8 +195,7 @@ ceph::key { 'admin':
 
     it { should contain_exec('ceph_osd_create_pci-0000:02:00.0-sas-0x500015554964d213-lun-0').with(
       'command' => 'ceph osd create dummy-uuid-1234',
-      'unless'  => 'ceph osd dump | grep -sq dummy-uuid-1234',
-      'require' => 'Ceph::Key[admin]'
+      'unless'  => 'ceph osd dump | grep -sq dummy-uuid-1234'
     ) }
 
     describe 'when the osd is created' do
@@ -206,7 +204,7 @@ ceph::key { 'admin':
           :concat_basedir      => '/var/lib/puppet/lib/concat',
           :'blkid_uuid_disk/by-path/pci-0000:02:00.0-sas-0x500015554964d213-lun-0-part1'  => 'dummy-uuid-1234',
           :'ceph_osd_id_disk/by-path/pci-0000:02:00.0-sas-0x500015554964d213-lun-0-part1' => '56',
-          :hostname            => 'dummy-host',
+          :hostname            => 'dummy-host'
         }
       end
 

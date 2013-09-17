@@ -57,11 +57,10 @@ size=1024m -n size=64k ${partname}",
   $blkid_uuid_fact = "blkid_uuid_${partfact}"
   $blkid = inline_template('<%= scope.lookupvar(blkid_uuid_fact) or "undefined" %>')
 
-  if $blkid != 'undefined'  and defined( Ceph::Key['admin'] ){
+  if $blkid != 'undefined' {
     exec { "ceph_osd_create_${devname}":
       command => "ceph osd create ${blkid}",
       unless  => "ceph osd dump | grep -sq ${blkid}",
-      require => Ceph::Key['admin'],
     }
 
     $osd_id_fact = "ceph_osd_id_${partfact}"
