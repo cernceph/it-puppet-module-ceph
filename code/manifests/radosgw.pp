@@ -31,8 +31,6 @@ define ceph::radosgw (
   include 'ceph::conf'
   include 'ceph::params'
 
-  Package['ceph'] -> Ceph::Key <<| title == 'admin' |>>
-
   ensure_packages( [ 'ceph-radosgw', 'httpd' ] )
 
   ceph::conf::radosgw { $name: }
