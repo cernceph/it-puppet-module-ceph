@@ -27,6 +27,9 @@ define ceph::osd::device (
   if $name =~ /by-path/ {
      $partfact = "disk/by-path/${devname}-part1"
      $partname = "${name}-part1"
+  } elsif $name =~ /VolGroup00-osd/ {
+     $partfact = downcase( "mapper/${devname}p1" )
+     $partname = "${name}p1"
   } else {
      $partfact = "${devname}1"
      $partname = "${name}1"
