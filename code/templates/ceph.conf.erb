@@ -23,7 +23,7 @@
   cluster network = <%= @cluster_network %>
   public network = <%= @public_network %>
 <% end -%>
-  filestore flusher = false
+  filestore wbthrottle enable = false
   osd data = <%= @osd_data %>
   osd journal = <%= @osd_journal_real %>
   osd mkfs type = xfs
