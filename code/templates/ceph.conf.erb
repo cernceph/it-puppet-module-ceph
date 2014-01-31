@@ -17,6 +17,8 @@
   osd pool default size = <%= @osd_pool_default_size -%>
 <% end -%>
   osd pool default min size = 1
+  osd pool default pg num = 1024
+  osd pool default pgp num = 1024
 
 [osd]
   osd journal size = <%= @journal_size_mb %>
