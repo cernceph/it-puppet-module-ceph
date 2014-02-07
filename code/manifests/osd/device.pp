@@ -58,9 +58,7 @@ size=1024m -n size=64k -i size=2048 ${partname}",
   }
 
   $blkid_uuid_fact = "blkid_uuid_${partfact}"
-  notify { "BLKID FACT ${devname}: ${blkid_uuid_fact}": }
   $blkid = inline_template('<%= scope.lookupvar(@blkid_uuid_fact) or "undefined" %>')
-  notify { "BLKID ${devname}: ${blkid}": }
 
   if $blkid != 'undefined' {
     exec { "ceph_osd_create_${devname}":
@@ -69,9 +67,7 @@ size=1024m -n size=64k -i size=2048 ${partname}",
     }
 
     $osd_id_fact = "ceph_osd_id_${partfact}"
-    notify { "OSD ID FACT ${devname}: ${osd_id_fact}": }
     $osd_id = inline_template('<%= scope.lookupvar(@osd_id_fact) or "undefined" %>')
-    notify { "OSD ID ${devname}: ${osd_id}":}
 
     if $osd_id != 'undefined' {
 
