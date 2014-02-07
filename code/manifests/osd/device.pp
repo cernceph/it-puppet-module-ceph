@@ -27,6 +27,9 @@ define ceph::osd::device (
   if $name =~ /by-path/ {
      $partfact = "disk/by-path/${devname}-part1"
      $partname = "${name}-part1"
+  } elsif $name =~ /VolGroup00-osd/ {
+     $partfact = downcase( "mapper/${devname}p1" )
+     $partname = "${name}p1"
   } else {
      $partfact = "${devname}1"
      $partname = "${name}1"
@@ -48,14 +51,14 @@ define ceph::osd::device (
 
   exec { "mkfs_${devname}":
     command   => "sleep 5 && mkfs.xfs -f -d agcount=${::processorcount} -l \
-size=1024m -n size=64k ${partname}",
+size=1024m -n size=64k -i size=2048 ${partname}",
     unless    => "xfs_admin -l ${partname}",
     logoutput => true,
     require   => [Package['xfsprogs'], Exec["mkpart_${devname}"]],
   }
 
   $blkid_uuid_fact = "blkid_uuid_${partfact}"
-  $blkid = inline_template('<%= scope.lookupvar(blkid_uuid_fact) or "undefined" %>')
+  $blkid = inline_template('<%= scope.lookupvar(@blkid_uuid_fact) or "undefined" %>')
 
   if $blkid != 'undefined' {
     exec { "ceph_osd_create_${devname}":
@@ -64,7 +67,7 @@ size=1024m -n size=64k ${partname}",
     }
 
     $osd_id_fact = "ceph_osd_id_${partfact}"
-    $osd_id = inline_template('<%= scope.lookupvar(osd_id_fact) or "undefined" %>')
+    $osd_id = inline_template('<%= scope.lookupvar(@osd_id_fact) or "undefined" %>')
 
     if $osd_id != 'undefined' {
 
