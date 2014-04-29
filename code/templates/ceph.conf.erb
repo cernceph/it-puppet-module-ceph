@@ -8,8 +8,9 @@
 
   fsid = <%= @fsid %>
 <% if @mon_osd_down_out_interval -%>
-  mon osd down out interval = <%= @mon_osd_down_out_interval -%>
+  mon osd down out interval = <%= @mon_osd_down_out_interval %>
 <% end -%>
+  debug filestore = 10
 
 [mon]
   mon data = <%= @mon_data %>
@@ -32,8 +33,10 @@
   osd mkfs type = xfs
   keyring = <%= @osd_data %>/keyring
 <% if @osd_crush_location -%>
-  osd crush location = <%= @osd_crush_location -%>
+  osd crush location = <%= @osd_crush_location %>
 <% end -%>
+  filestore max sync interval = 60
+  filestore min sync interval = 5
 
 [mds]
   mds data = <%= @mds_data %>
