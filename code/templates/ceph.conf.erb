@@ -8,8 +8,9 @@
 
   fsid = <%= @fsid %>
 <% if @mon_osd_down_out_interval -%>
-  mon osd down out interval = <%= @mon_osd_down_out_interval -%>
+  mon osd down out interval = <%= @mon_osd_down_out_interval %>
 <% end -%>
+  debug filestore = 10
 
 [mon]
   mon data = <%= @mon_data %>
