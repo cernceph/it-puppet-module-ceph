@@ -32,7 +32,7 @@
   osd mkfs type = xfs
   keyring = <%= @osd_data %>/keyring
 <% if @osd_crush_location -%>
-  osd crush location = <%= @osd_crush_location -%>
+  osd crush location = <%= @osd_crush_location %>
 <% end -%>
   filestore max sync interval = 60
   filestore min sync interval = 5
