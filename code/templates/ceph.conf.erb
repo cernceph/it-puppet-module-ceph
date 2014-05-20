@@ -11,6 +11,8 @@
   mon osd down out interval = <%= @mon_osd_down_out_interval %>
 <% end -%>
   debug filestore = 10
+  mon compact on start = true
+  mon compact on bootstrap = true
 
 [mon]
   mon data = <%= @mon_data %>
