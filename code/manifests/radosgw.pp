@@ -33,7 +33,7 @@ define ceph::radosgw (
 
   ensure_packages( [ 'mod_ssl', 'httpd', 'ceph-radosgw', 'mod_fastcgi' ] )
 
-  Package['mod_ssl'] -> Package['httpd'] -> Package['mod_fastcgi'] -> Package['ceph-radosgw']
+  Yumrepo['httpd-ceph'] -> Yumrepo['fastcgi-ceph'] -> Package['mod_ssl'] -> Package['httpd'] -> Package['mod_fastcgi'] -> Package['ceph-radosgw']
 
   ceph::conf::radosgw { $name: 
     rgw_dns_name => $dns_name

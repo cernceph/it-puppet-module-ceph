@@ -20,7 +20,6 @@ class ceph::yum::ceph (
     gpgcheck => 1,
     gpgkey   =>
       'https://ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/autobuild.asc',
-    before   => Package['mod_ssl'],
   }
 
   yumrepo { 'fastcgi-ceph':
@@ -31,6 +30,5 @@ class ceph::yum::ceph (
     gpgcheck => 1,
     gpgkey   =>
       'https://ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/autobuild.asc',
-    before   => Package['mod_fastcgi'],
   }
 }
