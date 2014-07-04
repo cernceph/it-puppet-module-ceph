@@ -37,8 +37,14 @@
   osd crush location = <%= @osd_crush_location %>
 <% end -%>
   filestore max sync interval = 60
-  filestore min sync interval = 5
   osd snap trim sleep = .01
+  osd scrub sleep = .1
+  osd disk thread ioprio class = 3
+  osd disk thread ioprio priority = 0
+  osd scrub chunk max = 5
+  osd deep scrub stride = 1048576
+  osd recovery op priority = 1
+  filestore queue max ops = 100
 
 [mds]
   mds data = <%= @mds_data %>
