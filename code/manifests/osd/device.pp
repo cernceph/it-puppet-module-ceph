@@ -25,7 +25,9 @@ define ceph::osd::device (
 
   $devname = regsubst($name, '.*/', '')
   if $name =~ /by-path/ {
-     $partfact = "disk/by-path/${devname}-part1"
+     # pci-0000:02:00.0-sas-0x500015554967120f-lun-0
+     $partfacttmp = "disk/by-path/${devname}-part1"
+     $partfact = regsubst($partfacttmp, 'sas-0x[0-9a-f]+([0-9a-f]{2})-lun', 'sas-\1-lun')
      $partname = "${name}-part1"
   } elsif $name =~ /VolGroup00-osd/ {
      $partfact = downcase( "mapper/${devname}p1" )
