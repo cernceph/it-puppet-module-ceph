@@ -35,8 +35,9 @@ begin
       blkid = Facter::Util::Resolution.exec("blkid")
       blkid and blkid.each_line do |line|
         if line =~ /^\/dev\/(.+):.*UUID="([a-fA-F0-9\-]+)"/
-          device = $1
+          devicetmp = $1
           uuid = $2
+          device = devicetmp.gsub(/sas-0x[0-9a-f]+([0-9a-f]{2})-lun/,'sas-\1-lun')
 
           Facter.add("blkid_uuid_#{device}") do
             setcode do
