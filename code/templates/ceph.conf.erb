@@ -11,6 +11,7 @@
   mon osd down out interval = <%= @mon_osd_down_out_interval %>
 <% end -%>
   debug filestore = 10
+  debug osd = 10
   mon compact on start = true
 
 [mon]
@@ -36,8 +37,9 @@
 <% if @osd_crush_location -%>
   osd crush location = <%= @osd_crush_location %>
 <% end -%>
+  osd crush update on start = false
   filestore max sync interval = 60
-  osd snap trim sleep = .01
+  osd snap trim sleep = .1
   osd scrub sleep = .1
   osd disk thread ioprio class = 3
   osd disk thread ioprio priority = 0
@@ -45,6 +47,10 @@
   osd deep scrub stride = 1048576
   osd recovery op priority = 1
   filestore queue max ops = 100
+  osd op threads = 4
+  osd disk threads = 2
+  osd recovery threads = 2
+  filestore op threads = 4
 
 [mds]
   mds data = <%= @mds_data %>
