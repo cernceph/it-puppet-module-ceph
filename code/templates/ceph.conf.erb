@@ -51,6 +51,8 @@
   osd disk threads = 2
   osd recovery threads = 2
   filestore op threads = 4
+  osd backfill scan min = 4
+  osd backfill scan max = 16
 
 [mds]
   mds data = <%= @mds_data %>
