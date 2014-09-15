@@ -10,8 +10,8 @@
 <% if @mon_osd_down_out_interval -%>
   mon osd down out interval = <%= @mon_osd_down_out_interval %>
 <% end -%>
-  debug filestore = 10
-  debug osd = 10
+  debug filestore = 0
+  debug osd = 0
   mon compact on start = true
 
 [mon]
@@ -51,6 +51,8 @@
   osd disk threads = 2
   osd recovery threads = 2
   filestore op threads = 4
+  osd backfill scan min = 4
+  osd backfill scan max = 16
 
 [mds]
   mds data = <%= @mds_data %>
