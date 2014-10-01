@@ -33,5 +33,12 @@ class ceph::osd (
     mode => '755'
   }
 
+  # patch ceph-disk with latest
+  file {'/usr/sbin/ceph-disk':
+    ensure => present,
+    source => 'puppet:///modules/ceph/ceph-disk',
+    mode => '755'
+  }
+
 }
 
