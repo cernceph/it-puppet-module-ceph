@@ -1010,10 +1010,15 @@ def prepare_journal_dev(
     if is_partition(journal):
         LOG.debug('Journal %s is a partition', journal)
         LOG.warning('OSD will not be hot-swappable if journal is not the same device as the osd data')
-        reusing_partition = True
-        base = get_partition_base(journal)
-        part = journal.replace(base,'')
-        journal = base # needed for later
+        if get_partition_type(journal) == JOURNAL_UUID:
+            LOG.debug('Journal %s was previously prepared with ceph-disk. Reusing it.', journal)
+            reusing_partition = True
+            base = get_partition_base(journal)
+            part = journal.replace(base,'')
+            journal = base # needed for later
+        else:
+            LOG.warning('Journal %s was not prepared with ceph-disk. Symlinking directly.', journal)
+            return (journal, None, None)
 
     ptype = JOURNAL_UUID
     if journal_dm_keypath:
@@ -1715,8 +1720,8 @@ def start_daemon(
                 [
                     svc,
                     'ceph',
-                    '--cluster',
-                    '{cluster}'.format(cluster=cluster),
+                    '-c',
+                    '/etc/ceph/{cluster}.conf'.format(cluster=cluster),
                     'start',
                     'osd.{osd_id}'.format(osd_id=osd_id),
                     ],
