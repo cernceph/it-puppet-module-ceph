@@ -16,7 +16,7 @@ define ceph::osd::udevice (
 
   exec { "ceph-disk-prepare-${name}":
     command   => "echo ceph-disk -v prepare ${osd_dev} ${journal_dev}",
-    unless    => "ceph-disk list | egrep '^ ${osd_dev}[0-9]+ ceph data'",
+    unless    => "ceph-disk list | egrep '^ ${osd_dev}[0-9]+ ceph'",
     logoutput => true,
   }
 
