@@ -1,17 +1,17 @@
 define ceph::osd::udevice (
-  $journal = undef
+  $journal = ''
 ) {
 
-  # prepend /dev/ if needed
-  $osd_dev = $name =~ /dev/ ? {
-    true  => $name,
-    false => "/dev/${name}"
+  if $name =~ /dev/ {
+    $osd_dev = $name
+  } else {
+    $osd_dev = "/dev/${name}"
   }
 
-  # prepend /dev/ if needed
-  $journal_dev = $journal =~ /dev/ ? {
-    true  => $journal,
-    false => "/dev/${journal}"
+  if $journal == '' or $journal =~ /dev/ {
+    $journal_dev = $journal
+  } else {
+    $journal_dev = "/dev/${journal}"
   }
 
   exec { "ceph-disk-prepare-${name}":
