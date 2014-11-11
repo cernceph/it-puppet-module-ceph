@@ -1,7 +1,13 @@
 FastCgiExternalServer /var/www/s3gw.fcgi -socket /var/run/ceph/radosgw.<%= @hostname %>
 
-LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" proxy_combined
+#LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" proxy_combined
+LogFormat "{ \"@timestamp\": \"%{%Y-%m-%dT%H:%M:%S%z}t\", \"@fields\": { \"client\": \"%a\", \"duration_usec\": %D, \"status\": %>s, \"path\": \"%U\", \"query_string\": \"%q\", \"method\": \"%m\", \"referrer\": \"%{Referer}i\", \"user_agent\": \"%{User-Agent}i\", \"remote_user\": \"%u\", \"byte_total\": %O, \"bytes_non_header\": %B, \"host\": \"%{Host}i\", \"rgw_access_key\": \"%{Authorization}i\", \"forwarded_for\": \"%{X-Forwarded-For}i\" } }" proxy_combined
 LogFormat "%{X-Forwarded-For}i %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" proxy_debug
+
+ExtendedStatus on
+<Location /mod_status>
+  SetHandler server-status
+</Location>
 
 <VirtualHost *:80>
   ServerName <%= @fqdn %>

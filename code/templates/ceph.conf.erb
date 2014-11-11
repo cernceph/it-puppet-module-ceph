@@ -4,7 +4,6 @@
   auth service required = <%= @auth_type %>
   auth client required = <%= @auth_type %>
 <% end -%>
-  keyring = /etc/ceph/keyring
 
   fsid = <%= @fsid %>
 <% if @mon_osd_down_out_interval -%>
@@ -30,10 +29,7 @@
 <% end -%>
   osd max backfills = 1
   osd recovery max active = 1
-  osd data = <%= @osd_data %>
-  osd journal = <%= @osd_journal_real %>
   osd mkfs type = xfs
-  keyring = <%= @osd_data %>/keyring
 <% if @osd_crush_location -%>
   osd crush location = <%= @osd_crush_location %>
 <% end -%>
