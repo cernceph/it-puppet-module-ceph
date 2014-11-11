@@ -1,4 +1,5 @@
 define ceph::conf::radosgw (
+  $rgw_dns_name
 ) {
 
   concat::fragment { "ceph-radosgw-${::hostname}.conf":
