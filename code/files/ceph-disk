@@ -1127,6 +1127,29 @@ def prepare_journal_dev(
             journal_uuid=journal_uuid,
             )
 
+        if not os.path.exists(journal_symlink):
+            # retrigger udev if the journal_symlink doesn't yet exist
+            LOG.debug('Journal symlink does not yet exist %s. Triggering udev.', journal_symlink)
+            # trigger udev
+            command(
+                [
+                    'udevadm',
+                    'trigger',
+                    '--subsystem-match=block',
+                    ],
+                )
+
+            # wait for udev event queue to clear
+            command(
+                [
+                    'udevadm',
+                    'settle',
+                    ],
+                )
+
+        # now the symlink must exist. If not, bail out.
+        assert os.path.exists(journal_symlink)
+
         journal_dmcrypt = None
         if journal_dm_keypath:
             journal_dmcrypt = journal_symlink
