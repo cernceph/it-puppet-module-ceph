@@ -49,6 +49,7 @@
   filestore op threads = 4
   osd backfill scan min = 4
   osd backfill scan max = 16
+  osd mount options xfs = rw, noatime, inode64, logbufs=8, logbsize=256k
 
 [mds]
   mds data = <%= @mds_data %>
