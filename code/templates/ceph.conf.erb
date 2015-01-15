@@ -37,8 +37,8 @@
   filestore max sync interval = 60
   osd snap trim sleep = .1
   osd scrub sleep = .1
-  osd disk thread ioprio class = 3
-  osd disk thread ioprio priority = 0
+  osd disk thread ioprio class = <%= @ioprio_class %>
+  osd disk thread ioprio priority = <%= @ioprio_priority %>
   osd scrub chunk max = 5
   osd deep scrub stride = 1048576
   osd recovery op priority = 1

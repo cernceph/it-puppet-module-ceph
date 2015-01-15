@@ -33,6 +33,8 @@ class ceph::conf (
   $mon_osd_down_out_interval = undef,
   $osd_pool_default_size     = undef,
   $osd_crush_location        = undef,
+  $ioprio_class              = '3',
+  $ioprio_priority           = '0',
 ) {
 
   include 'ceph::package'
