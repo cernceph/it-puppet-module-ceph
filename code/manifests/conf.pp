@@ -35,6 +35,7 @@ class ceph::conf (
   $osd_crush_location        = undef,
   $ioprio_class              = '3',
   $ioprio_priority           = '0',
+  $rgw_frontends              = 'fastcgi'
 ) {
 
   include 'ceph::package'
