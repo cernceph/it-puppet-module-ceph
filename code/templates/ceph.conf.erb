@@ -13,6 +13,10 @@
   debug osd = 0
   mon compact on start = true
 
+<% if @rgw_frontends -%>
+  rgw frontends = <%= @rgw_frontends %>
+<% end -%>
+
 [mon]
   mon data = <%= @mon_data %>
   osd pool default size = 3
