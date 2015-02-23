@@ -40,5 +40,11 @@ class ceph::osd (
     mode => '755'
   }
 
+  file {'/etc/rc.d/rc.local':
+    ensure => present,
+    source => 'puppet:///modules/ceph/osd-rc.local',
+    mode => '755'
+  }
+
 }
 
