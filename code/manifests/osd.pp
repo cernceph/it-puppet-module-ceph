@@ -46,5 +46,7 @@ class ceph::osd (
     mode => '755'
   }
 
+  # http://tracker.ceph.com/issues/6142
+  sysctl { 'kernel.pid_max': val => 4194303 }
 }
 
