@@ -46,14 +46,7 @@ class ceph::osd (
     mode => '755'
   }
 
-  file {'/etc/security/limits.d/91-ceph.conf':
-    ensure => present,
-    source => 'puppet:///modules/ceph/91-ceph.conf',
-    mode => '644'
-  }
-
   # http://tracker.ceph.com/issues/6142
   sysctl { 'kernel.pid_max': val => 4194303 }
-
 }
 
