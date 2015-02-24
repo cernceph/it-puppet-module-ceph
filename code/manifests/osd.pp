@@ -46,5 +46,11 @@ class ceph::osd (
     mode => '755'
   }
 
+  file {'/etc/security/limits.d/91-ceph.conf':
+    ensure => present,
+    source => 'puppet:///modules/ceph/91-ceph.conf',
+    mode => '644'
+  }
+
 }
 
