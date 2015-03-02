@@ -2,10 +2,10 @@
   host = <%= @hostname %>
   rgw socket path = /var/run/ceph/radosgw.<%= @hostname %>
   keyring = /etc/ceph/ceph.client.radosgw.<%= @hostname %>.keyring
-  log file = /var/log/radosgw/radosgw.log
   user = root
-  rgw enable ops log = true
-  rgw enable usage log = true
+  log file = /var/log/radosgw/radosgw.log
+  rgw enable ops log = false
+  rgw enable usage log = false
 <% if @rgw_dns_name -%>
   rgw dns name = <%= @rgw_dns_name -%>
 <% end -%>
