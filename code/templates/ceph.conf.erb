@@ -25,6 +25,8 @@
   osd pool default pgp num = 1024
   osd pool default flag hashpspool = true
   mon leveldb log = /var/log/ceph/ceph-mon.$id.leveldb.log
+  mon pg warn min per osd = 15
+  mon pg warn max object skew = 20
 
 [osd]
   osd journal size = <%= @journal_size_mb %>
