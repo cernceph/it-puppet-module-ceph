@@ -57,6 +57,19 @@
   osd backfill scan min = 4
   osd backfill scan max = 16
   osd mount options xfs = rw, noatime, inode64, logbufs=8, logbsize=256k
+<% if @osd_map_cache_size -%>
+  osd map cache size = <%= @osd_map_cache_size %>
+<% end -%>
+<% if @osd_map_max_advance -%>
+  osd map max advance = <%= @osd_map_max_advance %>
+<% end -%>
+<% if @osd_map_share_max_epochs -%>
+  osd map share max epochs = <%= @osd_map_share_max_epochs %>
+<% end -%>
+<% if @osd_pg_epoch_persisted_max_stale -%>
+  osd pg epoch persisted max stale = <%= @osd_pg_epoch_persisted_max_stale %>
+<% end -%>
+
 
 [mds]
   mds data = <%= @mds_data %>
