@@ -36,7 +36,7 @@ class ceph::conf (
   $ioprio_class              = '3',
   $ioprio_priority           = '0',
   $rgw_frontends             = undef,
-  $osd_map_dedup             = undef,
+  $osd_map_message_max       = undef,
   $osd_map_cache_size        = undef,
   $osd_map_max_advance       = undef,
   $osd_map_share_max_epochs  = undef,

@@ -16,6 +16,9 @@
 <% if @rgw_frontends -%>
   rgw frontends = <%= @rgw_frontends %>
 <% end -%>
+<% if @osd_map_message_max -%>
+  osd map message max = <%= @osd_map_message_max %>
+<% end -%>
 
 [mon]
   mon data = <%= @mon_data %>
@@ -68,9 +71,6 @@
 <% end -%>
 <% if @osd_pg_epoch_persisted_max_stale -%>
   osd pg epoch persisted max stale = <%= @osd_pg_epoch_persisted_max_stale %>
-<% end -%>
-<% if @osd_map_dedup -%>
-  osd map dedup = <%= @osd_map_dedup %>
 <% end -%>
 
 [mds]
