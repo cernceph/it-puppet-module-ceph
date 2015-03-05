@@ -69,7 +69,9 @@
 <% if @osd_pg_epoch_persisted_max_stale -%>
   osd pg epoch persisted max stale = <%= @osd_pg_epoch_persisted_max_stale %>
 <% end -%>
-
+<% if @osd_map_dedup -%>
+  osd map dedup = <%= @osd_map_dedup %>
+<% end -%>
 
 [mds]
   mds data = <%= @mds_data %>
