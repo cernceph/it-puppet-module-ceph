@@ -27,16 +27,16 @@ class ceph::osd (
 
   ensure_packages( [ 'xfsprogs', 'parted' ] )
 
-  file {'/etc/facter/facts.d/disks_external.sh':
-    ensure => present,
-    source => 'puppet:///modules/ceph/disks_external.sh',
-    mode => '755'
-  }
-
   # patch ceph-disk with latest
   file {'/usr/sbin/ceph-disk':
     ensure => present,
     source => 'puppet:///modules/ceph/ceph-disk',
+    mode => '755'
+  }
+  -> # put this before the fact so we don't try to create an osd too early
+  file {'/etc/facter/facts.d/disks_external.sh':
+    ensure => present,
+    source => 'puppet:///modules/ceph/disks_external.sh',
     mode => '755'
   }
 
