@@ -100,4 +100,7 @@ $(ceph --name mon. --keyring ${mon_data_real}/keyring \
 mon_status|egrep -v '\"state\": \"(leader|peon)\"'",
   }
 
+  # http://tracker.ceph.com/issues/6142
+  sysctl { 'kernel.pid_max': val => 4194303 }
+
 }
