@@ -30,6 +30,7 @@
   mon leveldb log = /var/log/ceph/ceph-mon.$id.leveldb.log
   mon pg warn min per osd = 15
   mon pg warn max object skew = 20
+  mon osd down out subtree limit = host
 
 [osd]
   osd journal size = <%= @journal_size_mb %>
