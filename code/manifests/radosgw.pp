@@ -34,8 +34,12 @@ define ceph::radosgw (
   package { 'ceph-radosgw':
     ensure => present,
   } ->
-  ceph::conf::radosgw { $name: 
-    rgw_dns_name => $dns_name
+  ceph::conf::radosgw { $name:
+    rgw_dns_name                     => $dns_name,
+    rgw_keystone_url                 => undef,
+    rgw_keystone_accepted_roles      => undef,
+    rgw_keystone_token_cache_size    => undef,
+    rgw_keystone_revocation_interval => undef
   } ->
   # assumes client.admin key is on the gw
   exec { 'ceph-radosgw-keyring':
@@ -47,7 +51,7 @@ define ceph::radosgw (
   exec { 'wget https://raw.github.com/ceph/ceph/master/src/init-radosgw.sysv -O /etc/init.d/radosgw && /bin/chmod +x /etc/init.d/radosgw':
     creates => '/etc/init.d/radosgw',
   } ->
-  service { "radosgw":
+  service { 'radosgw':
     ensure    => running,
     enable    => true,
     provider  => $::ceph::params::service_provider,
