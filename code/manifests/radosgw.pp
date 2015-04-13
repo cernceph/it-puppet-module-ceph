@@ -36,10 +36,6 @@ define ceph::radosgw (
   } ->
   ceph::conf::radosgw { $name:
     rgw_dns_name                     => $dns_name,
-    rgw_keystone_url                 => undef,
-    rgw_keystone_accepted_roles      => undef,
-    rgw_keystone_token_cache_size    => undef,
-    rgw_keystone_revocation_interval => undef
   } ->
   # assumes client.admin key is on the gw
   exec { 'ceph-radosgw-keyring':
