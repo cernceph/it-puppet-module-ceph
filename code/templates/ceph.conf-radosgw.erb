@@ -9,4 +9,12 @@
 <% if @rgw_dns_name -%>
   rgw dns name = <%= @rgw_dns_name -%>
 <% end -%>
+<% if @rgw_keystone_url ->
+  rgw keystone url = <%= @rgw_keystone_url -%>
+  rgw keystone admin token = %TEIGI__rgw_keystone_admin_token__%
+  rgw keystone accepted roles = <%= @rgw_keystone_accepted_roles -%>
+  rgw keystone token cache size = <%= @rgw_keystone_token_cache_size -%>
+  rgw keystone revocation interval = <%= @rgw_keystone_revocation_interval -%>
+  nss db path = <%= @rgw_keystone_url -%>
+<% end -%>
 
